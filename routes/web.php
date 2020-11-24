@@ -17,4 +17,11 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('inicio', 'HomeController@index')->name('inicio');
+
+// Specialty
+
+Route::get('especialidades', 'SpecialtyController@index');
+Route::get('especialidades/create', 'SpecialtyController@create');
+Route::get('especialidades/{specialty}/edit', 'SpecialtyController@edit');
+Route::post('especialidades', 'SpecialtyController@store');
