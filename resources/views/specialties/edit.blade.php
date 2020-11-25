@@ -5,7 +5,7 @@
             <div class="card-header border-0">
               <div class="row align-items-center">
                 <div class="col">
-                  <h3 class="mb-0">Nueva especialidad</h3>
+                  <h3 class="mb-0">Editar especialidad</h3>
                 </div>
                 <div class="col text-right">
                   <a href="{{ url('especialidades') }}" class="btn btn-sm btn-default">
@@ -17,24 +17,25 @@
             <div class="card-body">
 
             @if ($errors->any())
-              @foreach($errors->all() as $error)   
-              <div class="alert alert-danger" role="alert">
+            <div class="alert alert-danger" role="alert">
               <ul>
+              @foreach($errors->all() as $error)         
                 <li>{{ $error }} </li>
               @endforeach
               </ul>
               </div>
             @endif
 
-            <form action="{{ url('especialidades') }}" method="post">
+            <form action="{{ url('especialidades/'.$specialty->id) }}" method="post">
             @csrf
+            @method('PUT')
                 <div class="form-group">
                     <label for="name">Nombre de la especialidad</label>
-                    <input id="name" type="text" name="name" class="form-control" value="{{ old('name') }}" required>
+                    <input id="name" type="text" name="name" class="form-control" value="{{ old('name', $specialty->name) }}" required>
                 </div>
                 <div class="form-group">
                     <label for="description">Descripcion</label>
-                    <input id="description" type="text" name="description" class="form-control" value="{{ old('description') }}"> 
+                    <input id="description" type="text" name="description" class="form-control" value="{{ old('description', $specialty->description) }}"> 
                 </div>
                 <button type="submit" class="btn btn-primary">
                 Guardar

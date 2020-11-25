@@ -25,3 +25,10 @@ Route::get('especialidades', 'SpecialtyController@index');
 Route::get('especialidades/create', 'SpecialtyController@create');
 Route::get('especialidades/{specialty}/edit', 'SpecialtyController@edit');
 Route::post('especialidades', 'SpecialtyController@store');
+Route::put('especialidades/{specialty}', 'SpecialtyController@update');
+Route::delete('especialidades/{specialty}', 'SpecialtyController@destroy');
+
+// Doctors
+Route::resource('doctores', 'DoctorController');
+
+// Patients

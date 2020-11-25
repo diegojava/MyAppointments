@@ -5,11 +5,11 @@
             <div class="card-header border-0">
               <div class="row align-items-center">
                 <div class="col">
-                  <h3 class="mb-0">Especialidades</h3>
+                  <h3 class="mb-0">Medicos</h3>
                 </div>
                 <div class="col text-right">
-                  <a href="{{ url('especialidades/create') }}" class="btn btn-sm btn-success">
-                  Nueva especialidad
+                  <a href="{{ url('doctores/create') }}" class="btn btn-sm btn-success">
+                  Nuevo medico
                   </a>
                 </div>
               </div>
@@ -29,24 +29,28 @@
                 <thead class="thead-light">
                   <tr>
                     <th scope="col">Nombre</th>
-                    <th scope="col">Descripcion</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Cedula</th>
                     <th scope="col">Opciones</th>
                     
                   </tr>
                 </thead>
                 <tbody>
-                @foreach ($specialties as $specialty)
+                @foreach ($doctors as $doctor)
                   <tr>
                     <th scope="row">
-                      {{ $specialty->name }}
+                      {{ $doctor->name }}
                     </th>
                     <td>
-                    {{ $specialty->description }}
+                    {{ $doctor->email }}
+                    </td>
+                    <td>
+                    {{ $doctor->cedula }}
                     </td>
                     <td>
                       
-                      <form action="{{ url('especialidades/'.$specialty->id) }}" method="POST">
-                      <a href="{{ url('especialidades/'.$specialty->id.'/edit') }}" class="btn btn-sm btn-primary">Editar</a>
+                      <form action="{{ url('doctores/'.$doctor->id) }}" method="POST">
+                      <a href="{{ url('doctores/'.$doctor->id.'/edit') }}" class="btn btn-sm btn-primary">Editar</a>
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-sm btn-danger">Eliminar</button>
