@@ -29,6 +29,21 @@ Route::put('especialidades/{specialty}', 'SpecialtyController@update');
 Route::delete('especialidades/{specialty}', 'SpecialtyController@destroy');
 
 // Doctors
-Route::resource('doctores', 'DoctorController');
+//Route::resource('doctores', 'DoctorController');
+
+Route::get('doctores', 'DoctorController@index');
+Route::get('doctores/create', 'DoctorController@create');
+Route::get('doctores/{doctor}/edit', 'DoctorController@edit');
+Route::post('doctores', 'DoctorController@store');
+Route::put('doctores/{doctor}', 'DoctorController@update');
+Route::delete('doctores/{doctor}', 'DoctorController@destroy');
 
 // Patients
+//Route::resource('pacientes', 'PatientController');
+
+Route::get('pacientes', 'PatientController@index');
+Route::get('pacientes/create', 'PatientController@create');
+Route::get('pacientes/{patient}/edit', 'PatientController@edit');
+Route::post('pacientes', 'PatientController@store');
+Route::put('pacientes/{patient}', 'PatientController@update');
+Route::delete('pacientes/{patient}', 'PatientController@destroy');

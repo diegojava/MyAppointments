@@ -5,17 +5,17 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 
-class DoctorController extends Controller
+class PatientController extends Controller
 {
-    /**
+   /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $doctors = User::doctors()->get();
-        return view('doctors.index', compact('doctors'));
+        $patients = User::patients()->paginate(10);
+        return view('patients.index', compact('patients'));
     }
 
     /**
@@ -25,7 +25,7 @@ class DoctorController extends Controller
      */
     public function create()
     {
-        return view('doctors.create');
+        return view('patients.create');
     }
 
     /**
@@ -49,14 +49,13 @@ class DoctorController extends Controller
         User::create(
             $request->only('name', 'email', 'cedula', 'address', 'phone')
             + [
-                'role' => 'doctor',
+                'role' => 'patient',
                 'password' => bcrypt($request->input('password'))
             ]
         );
 
-        $notification = 'El medico se ha registrado correctamente.';
-        return redirect('/doctores')->with(compact('notification'));
-
+        $notification = 'El paciente se ha registrado correctamente.';
+        return redirect('/pacientes')->with(compact('notification'));
     }
 
     /**
@@ -78,8 +77,8 @@ class DoctorController extends Controller
      */
     public function edit($id)
     {
-        $doctor = User::doctors()->findorFail($id);
-        return view('doctors.edit', compact('doctor'));
+        $patient = User::patients()->findorFail($id);
+        return view('patients.edit', compact('patient'));
     }
 
     /**
@@ -101,7 +100,7 @@ class DoctorController extends Controller
 
         $this->validate($request, $rules);
 
-        $user = User::doctors()->findorFail($id);
+        $user = User::patients()->findorFail($id);
 
         $data = $request->only('name', 'email', 'cedula', 'address', 'phone');
         $password = $request->input('password');
@@ -120,16 +119,23 @@ class DoctorController extends Controller
             ]
         );*/
 
-        $notification = 'El medico <b>'.$user->name.'</b> se ha actualizado correctamente.';
-        return redirect('/doctores')->with(compact('notification'));
+        $notification = 'El paciente <b>'.$user->name.'</b> se ha actualizado correctamente.';
+        return redirect('/pacientes')->with(compact('notification'));
     }
 
-    public function destroy(User $doctor)
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(User $patient)
     {
-        $doctorName = $doctor->name;
-        $doctor->delete();
+        $patientName = $patient->name;
+        $patient->delete();
 
-        $notification = 'El medico <b>'.$doctorName.'</b> se ha eliminado correctamente.';
-        return redirect('/doctores')->with(compact('notification'));
+        $notification = 'El medico <b>'.$patientName.'</b> se ha eliminado correctamente.';
+        return redirect('/pacientes')->with(compact('notification'));
     }
 }
+
