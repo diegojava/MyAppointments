@@ -1,9 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\User;
+
+use App\Http\Controllers\Controller;
 
 class DoctorController extends Controller
 {
@@ -15,7 +17,8 @@ class DoctorController extends Controller
     public function index()
     {
         $doctors = User::doctors()->get();
-        return view('doctors.index', compact('doctors'));
+        $counts = User::doctors()->count();
+        return view('doctors.index', compact('doctors', 'counts'));
     }
 
     /**
